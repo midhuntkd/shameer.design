@@ -5,6 +5,8 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\PortfolioImageModel;
 use App\Models\PortfolioModel;
+use App\Models\PortfolioSocialMediaModel;
+use CodeIgniter\HTTP\Files\UploadedFile;
 
 class PortfolioController extends BaseController
 {
@@ -20,12 +22,14 @@ class PortfolioController extends BaseController
 
     protected $portfolioModel;
     protected $imageModel;
+    protected $socialMediaModel;
 
     public function __construct()
     {
         helper(['form', 'url', 'text']);
         $this->portfolioModel = new PortfolioModel();
         $this->imageModel = new PortfolioImageModel();
+        $this->socialMediaModel = new PortfolioSocialMediaModel();
     }
 
     public function index()
@@ -45,6 +49,7 @@ class PortfolioController extends BaseController
     {
         return view('admin/portfolios/form', [
             'portfolio' => null,
+            'socialMediaImages' => [],
             'projectTypes' => self::PROJECT_TYPES,
             'action' => 'admin/portfolios/store',
             'method' => 'create',
@@ -97,10 +102,18 @@ class PortfolioController extends BaseController
             'published_at' => 'permit_empty',
             'sort_order' => 'permit_empty|integer',
             'is_active' => 'permit_empty|in_list[0,1]',
+            'social_media' => 'permit_empty|in_list[0,1]',
         ];
 
         if (!$this->validate($rules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $useSocialMedia = $this->request->getPost('social_media') ? 1 : 0;
+        $socialMediaFiles = $this->getSocialMediaUploadFiles();
+        $socialMediaErrors = $this->validateSocialMediaUploads($useSocialMedia, $socialMediaFiles, true);
+        if (!empty($socialMediaErrors)) {
+            return redirect()->back()->withInput()->with('errors', $socialMediaErrors);
         }
 
         $projectType = trim((string) $this->request->getPost('project_type'));
@@ -164,6 +177,7 @@ class PortfolioController extends BaseController
             'published_at' => $this->normalizePublishedAt($this->request->getPost('published_at')),
             'sort_order' => (int) ($this->request->getPost('sort_order') ?: 0),
             'is_active' => (int)($this->request->getPost('is_active') ?: 0),
+            'social_media' => (int) $useSocialMedia,
         ];
 
         if ($urlColumn !== null) {
@@ -171,6 +185,10 @@ class PortfolioController extends BaseController
         }
 
         $portfolioId = $this->portfolioModel->insert($insertData);
+
+        if ($portfolioId && $useSocialMedia && !empty($socialMediaFiles)) {
+            $this->saveSocialMediaImages($portfolioId, $socialMediaFiles);
+        }
 
         $db->transComplete();
 
@@ -190,6 +208,7 @@ class PortfolioController extends BaseController
 
         return view('admin/portfolios/form', [
             'portfolio' => $portfolio,
+            'socialMediaImages' => $this->socialMediaModel->where('portfolio_id', $id)->orderBy('sort_order', 'ASC')->findAll(),
             'projectTypes' => self::PROJECT_TYPES,
             'action' => 'admin/portfolios/update/' . $id,
             'method' => 'edit',
@@ -247,10 +266,18 @@ class PortfolioController extends BaseController
             'published_at' => 'permit_empty',
             'sort_order' => 'permit_empty|integer',
             'is_active' => 'permit_empty|in_list[0,1]',
+            'social_media' => 'permit_empty|in_list[0,1]',
         ];
 
         if (!$this->validate($rules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $useSocialMedia = $this->request->getPost('social_media') ? 1 : 0;
+        $socialMediaFiles = $this->getSocialMediaUploadFiles();
+        $socialMediaErrors = $this->validateSocialMediaUploads($useSocialMedia, $socialMediaFiles, false);
+        if (!empty($socialMediaErrors)) {
+            return redirect()->back()->withInput()->with('errors', $socialMediaErrors);
         }
 
         $projectType = trim((string) $this->request->getPost('project_type'));
@@ -275,23 +302,10 @@ class PortfolioController extends BaseController
             'project_type' => $projectType !== '' ? $projectType : null,
             'roler' => $this->request->getPost('roler') ?: null,
             'project_overview' => $this->request->getPost('project_overview') ?: null,
-            'problem_statement' => $this->request->getPost('problem_statement') ?: null,
-            'key_challenges_identified' => $this->request->getPost('key_challenges_identified') ?: null,
-            'goals_objectives' => $this->request->getPost('goals_objectives') ?: null,
-            'research_analysis' => $this->request->getPost('research_analysis') ?: null,
-            'information_architecture' => $this->request->getPost('information_architecture') ?: null,
-            'wireframing' => $this->request->getPost('wireframing') ?: null,
-            'design_system' => $this->request->getPost('design_system') ?: null,
-            'the_system_included' => $this->request->getPost('the_system_included') ?: null,
-            'ui_design' => $this->request->getPost('ui_design') ?: null,
-            'design_highlights' => $this->request->getPost('design_highlights') ?: null,
-            'responsive_design' => $this->request->getPost('responsive_design') ?: null,
-            'special_attention_given_to' => $this->request->getPost('special_attention_given_to') ?: null,
-            'final_outcome' => $this->request->getPost('final_outcome') ?: null,
-            'key_learnings' => $this->request->getPost('key_learnings') ?: null,
             'published_at' => $this->normalizePublishedAt($this->request->getPost('published_at')),
             'sort_order' => (int) ($this->request->getPost('sort_order') ?: 0),
             'is_active' => (int)($this->request->getPost('is_active') ?: 0),
+            'social_media' => (int) $useSocialMedia,
         ];
 
         if ($urlColumn !== null) {
@@ -308,20 +322,47 @@ class PortfolioController extends BaseController
         }
 
         $this->replacePortfolioDetailImage($data, $portfolio, 'main_image', 'main_image_path');
-        $this->replacePortfolioDetailImage($data, $portfolio, 'problem_statement_image1', 'problem_statement_image1_path');
-        $this->replacePortfolioDetailImage($data, $portfolio, 'problem_statement_image2', 'problem_statement_image2_path');
-        $this->replacePortfolioDetailImage($data, $portfolio, 'user_experience_process_img1', 'user_experience_process_img1_path');
-        $this->replacePortfolioDetailImage($data, $portfolio, 'user_experience_process_img2', 'user_experience_process_img2_path');
-        $this->replacePortfolioDetailImage($data, $portfolio, 'design_system_img1', 'design_system_img1_path');
-        $this->replacePortfolioDetailImage($data, $portfolio, 'design_system_img2', 'design_system_img2_path');
-        $this->replacePortfolioDetailImage($data, $portfolio, 'design_system_img3', 'design_system_img3_path');
-        $this->replacePortfolioDetailImage($data, $portfolio, 'ui_design_img1', 'ui_design_img1_path');
-        $this->replacePortfolioDetailImage($data, $portfolio, 'ui_design_img2', 'ui_design_img2_path');
-        $this->replacePortfolioDetailImage($data, $portfolio, 'ui_design_img3', 'ui_design_img3_path');
-        $this->replacePortfolioDetailImage($data, $portfolio, 'ui_design_img4', 'ui_design_img4_path');
-        $this->replacePortfolioDetailImage($data, $portfolio, 'responsive_design_img1', 'responsive_design_img1_path');
-        $this->replacePortfolioDetailImage($data, $portfolio, 'responsive_design_img2', 'responsive_design_img2_path');
-        $this->replacePortfolioDetailImage($data, $portfolio, 'responsive_design_img3', 'responsive_design_img3_path');
+
+        if ($useSocialMedia) {
+            if (!empty($socialMediaFiles)) {
+                $this->clearSocialMediaImages($id);
+                $this->saveSocialMediaImages($id, $socialMediaFiles);
+            }
+        } else {
+            $data['problem_statement'] = $this->request->getPost('problem_statement') ?: null;
+            $data['key_challenges_identified'] = $this->request->getPost('key_challenges_identified') ?: null;
+            $data['goals_objectives'] = $this->request->getPost('goals_objectives') ?: null;
+            $data['research_analysis'] = $this->request->getPost('research_analysis') ?: null;
+            $data['information_architecture'] = $this->request->getPost('information_architecture') ?: null;
+            $data['wireframing'] = $this->request->getPost('wireframing') ?: null;
+            $data['design_system'] = $this->request->getPost('design_system') ?: null;
+            $data['the_system_included'] = $this->request->getPost('the_system_included') ?: null;
+            $data['ui_design'] = $this->request->getPost('ui_design') ?: null;
+            $data['design_highlights'] = $this->request->getPost('design_highlights') ?: null;
+            $data['responsive_design'] = $this->request->getPost('responsive_design') ?: null;
+            $data['special_attention_given_to'] = $this->request->getPost('special_attention_given_to') ?: null;
+            $data['final_outcome'] = $this->request->getPost('final_outcome') ?: null;
+            $data['key_learnings'] = $this->request->getPost('key_learnings') ?: null;
+
+            $this->replacePortfolioDetailImage($data, $portfolio, 'problem_statement_image1', 'problem_statement_image1_path');
+            $this->replacePortfolioDetailImage($data, $portfolio, 'problem_statement_image2', 'problem_statement_image2_path');
+            $this->replacePortfolioDetailImage($data, $portfolio, 'user_experience_process_img1', 'user_experience_process_img1_path');
+            $this->replacePortfolioDetailImage($data, $portfolio, 'user_experience_process_img2', 'user_experience_process_img2_path');
+            $this->replacePortfolioDetailImage($data, $portfolio, 'design_system_img1', 'design_system_img1_path');
+            $this->replacePortfolioDetailImage($data, $portfolio, 'design_system_img2', 'design_system_img2_path');
+            $this->replacePortfolioDetailImage($data, $portfolio, 'design_system_img3', 'design_system_img3_path');
+            $this->replacePortfolioDetailImage($data, $portfolio, 'ui_design_img1', 'ui_design_img1_path');
+            $this->replacePortfolioDetailImage($data, $portfolio, 'ui_design_img2', 'ui_design_img2_path');
+            $this->replacePortfolioDetailImage($data, $portfolio, 'ui_design_img3', 'ui_design_img3_path');
+            $this->replacePortfolioDetailImage($data, $portfolio, 'ui_design_img4', 'ui_design_img4_path');
+            $this->replacePortfolioDetailImage($data, $portfolio, 'responsive_design_img1', 'responsive_design_img1_path');
+            $this->replacePortfolioDetailImage($data, $portfolio, 'responsive_design_img2', 'responsive_design_img2_path');
+            $this->replacePortfolioDetailImage($data, $portfolio, 'responsive_design_img3', 'responsive_design_img3_path');
+        }
+
+        if (!$useSocialMedia && (int) ($portfolio['social_media'] ?? 0) === 1) {
+            $this->clearSocialMediaImages($id);
+        }
 
         $this->portfolioModel->update($id, $data);
 
@@ -359,6 +400,8 @@ class PortfolioController extends BaseController
             foreach ($images as $img) {
                 removeUploadedFile($img['image_path'] ?? null);
             }
+
+            $this->clearSocialMediaImages($id);
 
             $this->portfolioModel->delete($id);
         }
@@ -448,5 +491,102 @@ class PortfolioController extends BaseController
         }
 
         return null;
+    }
+
+    protected function getSocialMediaUploadFiles(): array
+    {
+        $files = $this->request->getFileMultiple('social_media_images');
+        if (empty($files)) {
+            return [];
+        }
+
+        $validFiles = [];
+        foreach ($files as $file) {
+            if ($file instanceof UploadedFile && $file->isValid() && !$file->hasMoved()) {
+                $validFiles[] = $file;
+            }
+        }
+
+        return $validFiles;
+    }
+
+    protected function validateSocialMediaUploads(int $useSocialMedia, array $files, bool $requireExact): array
+    {
+        if (!$useSocialMedia) {
+            return [];
+        }
+
+        $errors = [];
+        $count = count($files);
+
+        if ($requireExact) {
+            if ($count !== 7) {
+                $errors['social_media_images'] = 'Please upload exactly 7 social media images.';
+                return $errors;
+            }
+        } elseif ($count > 0 && $count !== 7) {
+            $errors['social_media_images'] = 'Please upload exactly 7 social media images when replacing.';
+            return $errors;
+        }
+
+        if ($count > 7) {
+            $errors['social_media_images'] = 'Please upload a maximum of 7 social media images.';
+            return $errors;
+        }
+
+        foreach ($files as $file) {
+            if (!$this->isAllowedImage($file)) {
+                $errors['social_media_images'] = 'All social media uploads must be valid image files.';
+                return $errors;
+            }
+
+            if ($file->getSizeByUnit('kb') > 4096) {
+                $errors['social_media_images'] = 'Each social media image must be under 4MB.';
+                return $errors;
+            }
+        }
+
+        return $errors;
+    }
+
+    protected function isAllowedImage(UploadedFile $file): bool
+    {
+        $mime = strtolower((string) $file->getMimeType());
+        $allowed = [
+            'image/jpeg',
+            'image/jpg',
+            'image/png',
+            'image/gif',
+            'image/webp',
+        ];
+
+        return in_array($mime, $allowed, true);
+    }
+
+    protected function saveSocialMediaImages(int $portfolioId, array $files): void
+    {
+        $order = 1;
+        foreach ($files as $file) {
+            $path = moveUploadedFile($file, 'portfolios/social-media');
+            if ($path === null) {
+                continue;
+            }
+
+            $this->socialMediaModel->insert([
+                'portfolio_id' => $portfolioId,
+                'image_path' => $path,
+                'sort_order' => $order,
+            ]);
+            $order++;
+        }
+    }
+
+    protected function clearSocialMediaImages(int $portfolioId): void
+    {
+        $images = $this->socialMediaModel->where('portfolio_id', $portfolioId)->findAll();
+        foreach ($images as $image) {
+            removeUploadedFile($image['image_path'] ?? null);
+        }
+        $this->socialMediaModel->where('portfolio_id', $portfolioId)->delete();
     }
 }

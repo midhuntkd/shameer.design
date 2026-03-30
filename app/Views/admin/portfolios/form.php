@@ -4,6 +4,7 @@
     $isEdit = $method === 'edit';
     $projectTypes = $projectTypes ?? ['E-commerce Website', 'Website Design', 'Web Application', 'E-comm Mobile App', 'Subscription Website', 'Corporate Website', 'Digital Campaign'];
     $publishedVal = '';
+    $socialMedia = (int) old('social_media', $portfolio['social_media'] ?? 0);
     if (!empty($portfolio['published_at'])) {
         $publishedVal = date('Y-m-d\TH:i', strtotime($portfolio['published_at']));
     }
@@ -16,6 +17,11 @@
             <div class="mb-3">
                 <label class="form-label">Title</label>
                 <input type="text" name="title" class="form-control" value="<?= esc(old('title', $portfolio['title'] ?? '')) ?>" required>
+            </div>
+
+            <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" id="social_media_toggle" name="social_media" value="1" <?= $socialMedia === 1 ? 'checked' : '' ?>>
+                <label class="form-check-label" for="social_media_toggle">Social Media</label>
             </div>
 
             <div class="row">
@@ -86,179 +92,201 @@
                 <label class="form-label">Project Overview</label>
                 <textarea name="project_overview" class="form-control" rows="4"><?= esc(old('project_overview', $portfolio['project_overview'] ?? '')) ?></textarea>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Problem Statement</label>
-                <textarea name="problem_statement" class="form-control" rows="4"><?= esc(old('problem_statement', $portfolio['problem_statement'] ?? '')) ?></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Key Challenges Identified</label>
-                <textarea name="key_challenges_identified" class="form-control" rows="4"><?= esc(old('key_challenges_identified', $portfolio['key_challenges_identified'] ?? '')) ?></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Goals &amp; Objectives</label>
-                <textarea name="goals_objectives" class="form-control" rows="4"><?= esc(old('goals_objectives', $portfolio['goals_objectives'] ?? '')) ?></textarea>
+
+            <div id="social-media-section" class="mb-4 <?= $socialMedia === 1 ? '' : 'd-none' ?>">
+                <div class="row">
+                    <?php for ($i = 1; $i <= 7; $i++): ?>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Social Media Image <?= $i ?></label>
+                            <input type="file" name="social_media_images[]" class="form-control" accept="image/*">
+                        </div>
+                    <?php endfor; ?>
+                </div>
+
+                <?php if ($isEdit && !empty($socialMediaImages)): ?>
+                    <div class="d-flex flex-wrap gap-2">
+                        <?php foreach ($socialMediaImages as $image): ?>
+                            <img src="<?= base_url($image['image_path']) ?>" width="120" alt="">
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
             </div>
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Problem Statement Image 1</label>
-                    <input type="file" name="problem_statement_image1" class="form-control" accept="image/*">
-                    <?php if ($isEdit && !empty($portfolio['problem_statement_image1_path'])): ?>
-                        <div class="mt-2"><img src="<?= base_url($portfolio['problem_statement_image1_path']) ?>" width="160" alt=""></div>
-                    <?php endif; ?>
+            <div id="portfolio-detail-section" class="<?= $socialMedia === 1 ? 'd-none' : '' ?>">
+                <div class="mb-3">
+                    <label class="form-label">Problem Statement</label>
+                    <textarea name="problem_statement" class="form-control" rows="4"><?= esc(old('problem_statement', $portfolio['problem_statement'] ?? '')) ?></textarea>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Problem Statement Image 2</label>
-                    <input type="file" name="problem_statement_image2" class="form-control" accept="image/*">
-                    <?php if ($isEdit && !empty($portfolio['problem_statement_image2_path'])): ?>
-                        <div class="mt-2"><img src="<?= base_url($portfolio['problem_statement_image2_path']) ?>" width="160" alt=""></div>
-                    <?php endif; ?>
+                <div class="mb-3">
+                    <label class="form-label">Key Challenges Identified</label>
+                    <textarea name="key_challenges_identified" class="form-control" rows="4"><?= esc(old('key_challenges_identified', $portfolio['key_challenges_identified'] ?? '')) ?></textarea>
                 </div>
-            </div>
+                <div class="mb-3">
+                    <label class="form-label">Goals &amp; Objectives</label>
+                    <textarea name="goals_objectives" class="form-control" rows="4"><?= esc(old('goals_objectives', $portfolio['goals_objectives'] ?? '')) ?></textarea>
+                </div>
 
-            <div class="mb-3">
-                <label class="form-label">Research &amp; Analysis</label>
-                <textarea name="research_analysis" class="form-control" rows="4"><?= esc(old('research_analysis', $portfolio['research_analysis'] ?? '')) ?></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Information Architecture</label>
-                <textarea name="information_architecture" class="form-control" rows="4"><?= esc(old('information_architecture', $portfolio['information_architecture'] ?? '')) ?></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Wireframing</label>
-                <textarea name="wireframing" class="form-control" rows="4"><?= esc(old('wireframing', $portfolio['wireframing'] ?? '')) ?></textarea>
-            </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Problem Statement Image 1</label>
+                        <input type="file" name="problem_statement_image1" class="form-control" accept="image/*">
+                        <?php if ($isEdit && !empty($portfolio['problem_statement_image1_path'])): ?>
+                            <div class="mt-2"><img src="<?= base_url($portfolio['problem_statement_image1_path']) ?>" width="160" alt=""></div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Problem Statement Image 2</label>
+                        <input type="file" name="problem_statement_image2" class="form-control" accept="image/*">
+                        <?php if ($isEdit && !empty($portfolio['problem_statement_image2_path'])): ?>
+                            <div class="mt-2"><img src="<?= base_url($portfolio['problem_statement_image2_path']) ?>" width="160" alt=""></div>
+                        <?php endif; ?>
+                    </div>
+                </div>
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">User Experience Process Img 1</label>
-                    <input type="file" name="user_experience_process_img1" class="form-control" accept="image/*">
-                    <?php if ($isEdit && !empty($portfolio['user_experience_process_img1_path'])): ?>
-                        <div class="mt-2"><img src="<?= base_url($portfolio['user_experience_process_img1_path']) ?>" width="160" alt=""></div>
-                    <?php endif; ?>
+                <div class="mb-3">
+                    <label class="form-label">Research &amp; Analysis</label>
+                    <textarea name="research_analysis" class="form-control" rows="4"><?= esc(old('research_analysis', $portfolio['research_analysis'] ?? '')) ?></textarea>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">User Experience Process Img 2</label>
-                    <input type="file" name="user_experience_process_img2" class="form-control" accept="image/*">
-                    <?php if ($isEdit && !empty($portfolio['user_experience_process_img2_path'])): ?>
-                        <div class="mt-2"><img src="<?= base_url($portfolio['user_experience_process_img2_path']) ?>" width="160" alt=""></div>
-                    <?php endif; ?>
+                <div class="mb-3">
+                    <label class="form-label">Information Architecture</label>
+                    <textarea name="information_architecture" class="form-control" rows="4"><?= esc(old('information_architecture', $portfolio['information_architecture'] ?? '')) ?></textarea>
                 </div>
-            </div>
+                <div class="mb-3">
+                    <label class="form-label">Wireframing</label>
+                    <textarea name="wireframing" class="form-control" rows="4"><?= esc(old('wireframing', $portfolio['wireframing'] ?? '')) ?></textarea>
+                </div>
 
-            <div class="mb-3">
-                <label class="form-label">Design System</label>
-                <textarea name="design_system" class="form-control" rows="4"><?= esc(old('design_system', $portfolio['design_system'] ?? '')) ?></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">The System Included</label>
-                <textarea name="the_system_included" class="form-control" rows="4"><?= esc(old('the_system_included', $portfolio['the_system_included'] ?? '')) ?></textarea>
-            </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">User Experience Process Img 1</label>
+                        <input type="file" name="user_experience_process_img1" class="form-control" accept="image/*">
+                        <?php if ($isEdit && !empty($portfolio['user_experience_process_img1_path'])): ?>
+                            <div class="mt-2"><img src="<?= base_url($portfolio['user_experience_process_img1_path']) ?>" width="160" alt=""></div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">User Experience Process Img 2</label>
+                        <input type="file" name="user_experience_process_img2" class="form-control" accept="image/*">
+                        <?php if ($isEdit && !empty($portfolio['user_experience_process_img2_path'])): ?>
+                            <div class="mt-2"><img src="<?= base_url($portfolio['user_experience_process_img2_path']) ?>" width="160" alt=""></div>
+                        <?php endif; ?>
+                    </div>
+                </div>
 
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Design System Img 1</label>
-                    <input type="file" name="design_system_img1" class="form-control" accept="image/*">
-                    <?php if ($isEdit && !empty($portfolio['design_system_img1_path'])): ?>
-                        <div class="mt-2"><img src="<?= base_url($portfolio['design_system_img1_path']) ?>" width="140" alt=""></div>
-                    <?php endif; ?>
+                <div class="mb-3">
+                    <label class="form-label">Design System</label>
+                    <textarea name="design_system" class="form-control" rows="4"><?= esc(old('design_system', $portfolio['design_system'] ?? '')) ?></textarea>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Design System Img 2</label>
-                    <input type="file" name="design_system_img2" class="form-control" accept="image/*">
-                    <?php if ($isEdit && !empty($portfolio['design_system_img2_path'])): ?>
-                        <div class="mt-2"><img src="<?= base_url($portfolio['design_system_img2_path']) ?>" width="140" alt=""></div>
-                    <?php endif; ?>
+                <div class="mb-3">
+                    <label class="form-label">The System Included</label>
+                    <textarea name="the_system_included" class="form-control" rows="4"><?= esc(old('the_system_included', $portfolio['the_system_included'] ?? '')) ?></textarea>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Design System Img 3</label>
-                    <input type="file" name="design_system_img3" class="form-control" accept="image/*">
-                    <?php if ($isEdit && !empty($portfolio['design_system_img3_path'])): ?>
-                        <div class="mt-2"><img src="<?= base_url($portfolio['design_system_img3_path']) ?>" width="140" alt=""></div>
-                    <?php endif; ?>
-                </div>
-            </div>
 
-            <div class="mb-3">
-                <label class="form-label">UI Design</label>
-                <textarea name="ui_design" class="form-control" rows="4"><?= esc(old('ui_design', $portfolio['ui_design'] ?? '')) ?></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Design Highlights</label>
-                <textarea name="design_highlights" class="form-control" rows="4"><?= esc(old('design_highlights', $portfolio['design_highlights'] ?? '')) ?></textarea>
-            </div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Design System Img 1</label>
+                        <input type="file" name="design_system_img1" class="form-control" accept="image/*">
+                        <?php if ($isEdit && !empty($portfolio['design_system_img1_path'])): ?>
+                            <div class="mt-2"><img src="<?= base_url($portfolio['design_system_img1_path']) ?>" width="140" alt=""></div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Design System Img 2</label>
+                        <input type="file" name="design_system_img2" class="form-control" accept="image/*">
+                        <?php if ($isEdit && !empty($portfolio['design_system_img2_path'])): ?>
+                            <div class="mt-2"><img src="<?= base_url($portfolio['design_system_img2_path']) ?>" width="140" alt=""></div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Design System Img 3</label>
+                        <input type="file" name="design_system_img3" class="form-control" accept="image/*">
+                        <?php if ($isEdit && !empty($portfolio['design_system_img3_path'])): ?>
+                            <div class="mt-2"><img src="<?= base_url($portfolio['design_system_img3_path']) ?>" width="140" alt=""></div>
+                        <?php endif; ?>
+                    </div>
+                </div>
 
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    <label class="form-label">UI Design Img 1</label>
-                    <input type="file" name="ui_design_img1" class="form-control" accept="image/*">
-                    <?php if ($isEdit && !empty($portfolio['ui_design_img1_path'])): ?>
-                        <div class="mt-2"><img src="<?= base_url($portfolio['ui_design_img1_path']) ?>" width="120" alt=""></div>
-                    <?php endif; ?>
+                <div class="mb-3">
+                    <label class="form-label">UI Design</label>
+                    <textarea name="ui_design" class="form-control" rows="4"><?= esc(old('ui_design', $portfolio['ui_design'] ?? '')) ?></textarea>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <label class="form-label">UI Design Img 2</label>
-                    <input type="file" name="ui_design_img2" class="form-control" accept="image/*">
-                    <?php if ($isEdit && !empty($portfolio['ui_design_img2_path'])): ?>
-                        <div class="mt-2"><img src="<?= base_url($portfolio['ui_design_img2_path']) ?>" width="120" alt=""></div>
-                    <?php endif; ?>
+                <div class="mb-3">
+                    <label class="form-label">Design Highlights</label>
+                    <textarea name="design_highlights" class="form-control" rows="4"><?= esc(old('design_highlights', $portfolio['design_highlights'] ?? '')) ?></textarea>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <label class="form-label">UI Design Img 3</label>
-                    <input type="file" name="ui_design_img3" class="form-control" accept="image/*">
-                    <?php if ($isEdit && !empty($portfolio['ui_design_img3_path'])): ?>
-                        <div class="mt-2"><img src="<?= base_url($portfolio['ui_design_img3_path']) ?>" width="120" alt=""></div>
-                    <?php endif; ?>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <label class="form-label">UI Design Img 4</label>
-                    <input type="file" name="ui_design_img4" class="form-control" accept="image/*">
-                    <?php if ($isEdit && !empty($portfolio['ui_design_img4_path'])): ?>
-                        <div class="mt-2"><img src="<?= base_url($portfolio['ui_design_img4_path']) ?>" width="120" alt=""></div>
-                    <?php endif; ?>
-                </div>
-            </div>
 
-            <div class="mb-3">
-                <label class="form-label">Responsive Design</label>
-                <textarea name="responsive_design" class="form-control" rows="4"><?= esc(old('responsive_design', $portfolio['responsive_design'] ?? '')) ?></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Special Attention Given To</label>
-                <textarea name="special_attention_given_to" class="form-control" rows="4"><?= esc(old('special_attention_given_to', $portfolio['special_attention_given_to'] ?? '')) ?></textarea>
-            </div>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">UI Design Img 1</label>
+                        <input type="file" name="ui_design_img1" class="form-control" accept="image/*">
+                        <?php if ($isEdit && !empty($portfolio['ui_design_img1_path'])): ?>
+                            <div class="mt-2"><img src="<?= base_url($portfolio['ui_design_img1_path']) ?>" width="120" alt=""></div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">UI Design Img 2</label>
+                        <input type="file" name="ui_design_img2" class="form-control" accept="image/*">
+                        <?php if ($isEdit && !empty($portfolio['ui_design_img2_path'])): ?>
+                            <div class="mt-2"><img src="<?= base_url($portfolio['ui_design_img2_path']) ?>" width="120" alt=""></div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">UI Design Img 3</label>
+                        <input type="file" name="ui_design_img3" class="form-control" accept="image/*">
+                        <?php if ($isEdit && !empty($portfolio['ui_design_img3_path'])): ?>
+                            <div class="mt-2"><img src="<?= base_url($portfolio['ui_design_img3_path']) ?>" width="120" alt=""></div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">UI Design Img 4</label>
+                        <input type="file" name="ui_design_img4" class="form-control" accept="image/*">
+                        <?php if ($isEdit && !empty($portfolio['ui_design_img4_path'])): ?>
+                            <div class="mt-2"><img src="<?= base_url($portfolio['ui_design_img4_path']) ?>" width="120" alt=""></div>
+                        <?php endif; ?>
+                    </div>
+                </div>
 
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Responsive Design Img 1</label>
-                    <input type="file" name="responsive_design_img1" class="form-control" accept="image/*">
-                    <?php if ($isEdit && !empty($portfolio['responsive_design_img1_path'])): ?>
-                        <div class="mt-2"><img src="<?= base_url($portfolio['responsive_design_img1_path']) ?>" width="140" alt=""></div>
-                    <?php endif; ?>
+                <div class="mb-3">
+                    <label class="form-label">Responsive Design</label>
+                    <textarea name="responsive_design" class="form-control" rows="4"><?= esc(old('responsive_design', $portfolio['responsive_design'] ?? '')) ?></textarea>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Responsive Design Img 2</label>
-                    <input type="file" name="responsive_design_img2" class="form-control" accept="image/*">
-                    <?php if ($isEdit && !empty($portfolio['responsive_design_img2_path'])): ?>
-                        <div class="mt-2"><img src="<?= base_url($portfolio['responsive_design_img2_path']) ?>" width="140" alt=""></div>
-                    <?php endif; ?>
+                <div class="mb-3">
+                    <label class="form-label">Special Attention Given To</label>
+                    <textarea name="special_attention_given_to" class="form-control" rows="4"><?= esc(old('special_attention_given_to', $portfolio['special_attention_given_to'] ?? '')) ?></textarea>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Responsive Design Img 3</label>
-                    <input type="file" name="responsive_design_img3" class="form-control" accept="image/*">
-                    <?php if ($isEdit && !empty($portfolio['responsive_design_img3_path'])): ?>
-                        <div class="mt-2"><img src="<?= base_url($portfolio['responsive_design_img3_path']) ?>" width="140" alt=""></div>
-                    <?php endif; ?>
-                </div>
-            </div>
 
-            <div class="mb-3">
-                <label class="form-label">Final Outcome</label>
-                <textarea name="final_outcome" class="form-control" rows="4"><?= esc(old('final_outcome', $portfolio['final_outcome'] ?? '')) ?></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Key Learnings</label>
-                <textarea name="key_learnings" class="form-control" rows="4"><?= esc(old('key_learnings', $portfolio['key_learnings'] ?? '')) ?></textarea>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Responsive Design Img 1</label>
+                        <input type="file" name="responsive_design_img1" class="form-control" accept="image/*">
+                        <?php if ($isEdit && !empty($portfolio['responsive_design_img1_path'])): ?>
+                            <div class="mt-2"><img src="<?= base_url($portfolio['responsive_design_img1_path']) ?>" width="140" alt=""></div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Responsive Design Img 2</label>
+                        <input type="file" name="responsive_design_img2" class="form-control" accept="image/*">
+                        <?php if ($isEdit && !empty($portfolio['responsive_design_img2_path'])): ?>
+                            <div class="mt-2"><img src="<?= base_url($portfolio['responsive_design_img2_path']) ?>" width="140" alt=""></div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Responsive Design Img 3</label>
+                        <input type="file" name="responsive_design_img3" class="form-control" accept="image/*">
+                        <?php if ($isEdit && !empty($portfolio['responsive_design_img3_path'])): ?>
+                            <div class="mt-2"><img src="<?= base_url($portfolio['responsive_design_img3_path']) ?>" width="140" alt=""></div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Final Outcome</label>
+                    <textarea name="final_outcome" class="form-control" rows="4"><?= esc(old('final_outcome', $portfolio['final_outcome'] ?? '')) ?></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Key Learnings</label>
+                    <textarea name="key_learnings" class="form-control" rows="4"><?= esc(old('key_learnings', $portfolio['key_learnings'] ?? '')) ?></textarea>
+                </div>
             </div>
 
             <div class="row">
@@ -283,4 +311,31 @@
         </form>
     </div>
 </div>
+<script>
+    (function () {
+        const toggle = document.getElementById('social_media_toggle');
+        const detailSection = document.getElementById('portfolio-detail-section');
+        const socialSection = document.getElementById('social-media-section');
+
+        if (!toggle || !detailSection || !socialSection) {
+            return;
+        }
+
+        const setState = () => {
+            const enabled = toggle.checked;
+            detailSection.classList.toggle('d-none', enabled);
+            socialSection.classList.toggle('d-none', !enabled);
+
+            detailSection.querySelectorAll('input, textarea, select').forEach((el) => {
+                el.disabled = enabled;
+            });
+            socialSection.querySelectorAll('input, textarea, select').forEach((el) => {
+                el.disabled = !enabled;
+            });
+        };
+
+        toggle.addEventListener('change', setState);
+        setState();
+    })();
+</script>
 <?= $this->endSection() ?>

@@ -55,5 +55,6 @@ class PortfolioModel extends Model
         'published_at',
         'sort_order',
         'is_active',
+        'social_media',
     ];
 }
