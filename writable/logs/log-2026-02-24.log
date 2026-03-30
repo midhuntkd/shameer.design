@@ -1,0 +1,234 @@
+DEBUG - 2026-02-24 02:13:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2026-02-24 02:14:01 --> CSRF token verified.
+DEBUG - 2026-02-24 02:14:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-24 02:14:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-02-24 08:35:39 --> ErrorException: include(layouts/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: /]
+in APPPATH\Views\pages\home.php on line 1.
+ 1 APPPATH\Views\pages\home.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(layouts/header.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php', 1)
+ 2 APPPATH\Views\pages\home.php(1): include()
+ 3 SYSTEMPATH\View\View.php(238): include('D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php')
+ 4 SYSTEMPATH\View\View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('pages/home', [], true)
+ 6 APPPATH\Controllers\Pages.php(10): view('pages/home')
+ 7 APPPATH\Controllers\Pages.php(16): App\Controllers\Pages->render('Home', 'home')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Pages->home()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-24 08:38:41 --> ErrorException: include(../layouts/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: /]
+in APPPATH\Views\pages\home.php on line 1.
+ 1 APPPATH\Views\pages\home.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../layouts/header.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php', 1)
+ 2 APPPATH\Views\pages\home.php(1): include()
+ 3 SYSTEMPATH\View\View.php(238): include('D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php')
+ 4 SYSTEMPATH\View\View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('pages/home', [], true)
+ 6 APPPATH\Controllers\Pages.php(10): view('pages/home')
+ 7 APPPATH\Controllers\Pages.php(16): App\Controllers\Pages->render('Home', 'home')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Pages->home()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-24 08:38:46 --> ErrorException: include(../layouts/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: /]
+in APPPATH\Views\pages\home.php on line 1.
+ 1 APPPATH\Views\pages\home.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../layouts/header.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php', 1)
+ 2 APPPATH\Views\pages\home.php(1): include()
+ 3 SYSTEMPATH\View\View.php(238): include('D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php')
+ 4 SYSTEMPATH\View\View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('pages/home', [], true)
+ 6 APPPATH\Controllers\Pages.php(10): view('pages/home')
+ 7 APPPATH\Controllers\Pages.php(16): App\Controllers\Pages->render('Home', 'home')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Pages->home()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-24 08:38:46 --> ErrorException: include(../layouts/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: /]
+in APPPATH\Views\pages\home.php on line 1.
+ 1 APPPATH\Views\pages\home.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../layouts/header.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php', 1)
+ 2 APPPATH\Views\pages\home.php(1): include()
+ 3 SYSTEMPATH\View\View.php(238): include('D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php')
+ 4 SYSTEMPATH\View\View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('pages/home', [], true)
+ 6 APPPATH\Controllers\Pages.php(10): view('pages/home')
+ 7 APPPATH\Controllers\Pages.php(16): App\Controllers\Pages->render('Home', 'home')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Pages->home()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-24 08:38:46 --> ErrorException: include(../layouts/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: /]
+in APPPATH\Views\pages\home.php on line 1.
+ 1 APPPATH\Views\pages\home.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../layouts/header.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php', 1)
+ 2 APPPATH\Views\pages\home.php(1): include()
+ 3 SYSTEMPATH\View\View.php(238): include('D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php')
+ 4 SYSTEMPATH\View\View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('pages/home', [], true)
+ 6 APPPATH\Controllers\Pages.php(10): view('pages/home')
+ 7 APPPATH\Controllers\Pages.php(16): App\Controllers\Pages->render('Home', 'home')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Pages->home()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-24 08:38:46 --> ErrorException: include(../layouts/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: /]
+in APPPATH\Views\pages\home.php on line 1.
+ 1 APPPATH\Views\pages\home.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../layouts/header.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php', 1)
+ 2 APPPATH\Views\pages\home.php(1): include()
+ 3 SYSTEMPATH\View\View.php(238): include('D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php')
+ 4 SYSTEMPATH\View\View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('pages/home', [], true)
+ 6 APPPATH\Controllers\Pages.php(10): view('pages/home')
+ 7 APPPATH\Controllers\Pages.php(16): App\Controllers\Pages->render('Home', 'home')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Pages->home()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-24 08:38:46 --> ErrorException: include(../layouts/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: /]
+in APPPATH\Views\pages\home.php on line 1.
+ 1 APPPATH\Views\pages\home.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../layouts/header.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php', 1)
+ 2 APPPATH\Views\pages\home.php(1): include()
+ 3 SYSTEMPATH\View\View.php(238): include('D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php')
+ 4 SYSTEMPATH\View\View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('pages/home', [], true)
+ 6 APPPATH\Controllers\Pages.php(10): view('pages/home')
+ 7 APPPATH\Controllers\Pages.php(16): App\Controllers\Pages->render('Home', 'home')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Pages->home()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-24 08:38:47 --> ErrorException: include(../layouts/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: /]
+in APPPATH\Views\pages\home.php on line 1.
+ 1 APPPATH\Views\pages\home.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../layouts/header.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php', 1)
+ 2 APPPATH\Views\pages\home.php(1): include()
+ 3 SYSTEMPATH\View\View.php(238): include('D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php')
+ 4 SYSTEMPATH\View\View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('pages/home', [], true)
+ 6 APPPATH\Controllers\Pages.php(10): view('pages/home')
+ 7 APPPATH\Controllers\Pages.php(16): App\Controllers\Pages->render('Home', 'home')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Pages->home()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-24 08:38:47 --> ErrorException: include(../layouts/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: /]
+in APPPATH\Views\pages\home.php on line 1.
+ 1 APPPATH\Views\pages\home.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../layouts/header.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php', 1)
+ 2 APPPATH\Views\pages\home.php(1): include()
+ 3 SYSTEMPATH\View\View.php(238): include('D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php')
+ 4 SYSTEMPATH\View\View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('pages/home', [], true)
+ 6 APPPATH\Controllers\Pages.php(10): view('pages/home')
+ 7 APPPATH\Controllers\Pages.php(16): App\Controllers\Pages->render('Home', 'home')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Pages->home()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-24 08:38:47 --> ErrorException: include(../layouts/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: /]
+in APPPATH\Views\pages\home.php on line 1.
+ 1 APPPATH\Views\pages\home.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../layouts/header.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php', 1)
+ 2 APPPATH\Views\pages\home.php(1): include()
+ 3 SYSTEMPATH\View\View.php(238): include('D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php')
+ 4 SYSTEMPATH\View\View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('pages/home', [], true)
+ 6 APPPATH\Controllers\Pages.php(10): view('pages/home')
+ 7 APPPATH\Controllers\Pages.php(16): App\Controllers\Pages->render('Home', 'home')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Pages->home()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-24 08:38:47 --> ErrorException: include(../layouts/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: /]
+in APPPATH\Views\pages\home.php on line 1.
+ 1 APPPATH\Views\pages\home.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../layouts/header.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php', 1)
+ 2 APPPATH\Views\pages\home.php(1): include()
+ 3 SYSTEMPATH\View\View.php(238): include('D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php')
+ 4 SYSTEMPATH\View\View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('pages/home', [], true)
+ 6 APPPATH\Controllers\Pages.php(10): view('pages/home')
+ 7 APPPATH\Controllers\Pages.php(16): App\Controllers\Pages->render('Home', 'home')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Pages->home()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-24 08:38:47 --> ErrorException: include(../layouts/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: /]
+in APPPATH\Views\pages\home.php on line 1.
+ 1 APPPATH\Views\pages\home.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../layouts/header.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php', 1)
+ 2 APPPATH\Views\pages\home.php(1): include()
+ 3 SYSTEMPATH\View\View.php(238): include('D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php')
+ 4 SYSTEMPATH\View\View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('pages/home', [], true)
+ 6 APPPATH\Controllers\Pages.php(10): view('pages/home')
+ 7 APPPATH\Controllers\Pages.php(16): App\Controllers\Pages->render('Home', 'home')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Pages->home()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-24 08:38:47 --> ErrorException: include(../layouts/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: /]
+in APPPATH\Views\pages\home.php on line 1.
+ 1 APPPATH\Views\pages\home.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../layouts/header.php): Failed to open stream: No such file or directory', 'D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php', 1)
+ 2 APPPATH\Views\pages\home.php(1): include()
+ 3 SYSTEMPATH\View\View.php(238): include('D:\\xampp\\htdocs\\SHAMEER\\app\\Views\\pages\\home.php')
+ 4 SYSTEMPATH\View\View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('pages/home', [], true)
+ 6 APPPATH\Controllers\Pages.php(10): view('pages/home')
+ 7 APPPATH\Controllers\Pages.php(16): App\Controllers\Pages->render('Home', 'home')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Pages->home()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-02-24 08:54:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2026-02-24 08:54:42 --> CSRF token verified.
+DEBUG - 2026-02-24 08:54:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-24 08:54:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-24 08:54:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-24 08:54:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-24 09:48:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2026-02-24 09:50:58 --> CSRF token verified.
+DEBUG - 2026-02-24 09:50:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-24 09:50:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-24 09:51:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2026-02-24 09:51:43 --> CSRF token verified.
+DEBUG - 2026-02-24 09:51:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-24 09:51:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-24 09:51:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2026-02-24 09:52:25 --> CSRF token verified.
+DEBUG - 2026-02-24 09:52:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-24 09:52:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-24 09:52:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2026-02-24 09:52:50 --> CSRF token verified.
+DEBUG - 2026-02-24 09:52:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-24 09:52:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
