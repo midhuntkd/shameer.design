@@ -28,7 +28,7 @@
 
       <nav class="flex space-x-5 lg:space-x-9 xl:space-x-12 justify-center">
 
-        <a href="https://www.linkedin.com/in/abdul-shameer-88097248/" target="_blank">LinkedIn</a>
+        <a href="www.linkedin.com/in/abdul-shameer-88097248" target="_blank">LinkedIn</a>
 
         <a href="#">Dribble</a>
 
@@ -69,23 +69,7 @@
 <script src="<?= base_url('assets/js/main.js') ?>"></script>
 
 <script>
- $(document).ready(function () {
-        let itemHeight = $(".item").outerHeight();
-        let interval = 4000;
 
-        setInterval(function () {
-          $(".parent").animate(
-            {
-              marginTop: -itemHeight,
-            },
-            600,
-            function () {
-              $(".parent .item:first").appendTo(".parent");
-              $(".parent").css("marginTop", 0);
-            },
-          );
-        }, interval);
-      });
 
 
   window.addEventListener("load", function () {

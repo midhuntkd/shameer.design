@@ -3,7 +3,7 @@
         <div class="loader"></div>
     </div>
 
-    
+
     <?php include APPPATH . 'Views/layouts/stick-nav-device.php'; ?>
     <div id="smooth-wrapper">
         <div id="smooth-content">
@@ -23,11 +23,16 @@
                     </div>
                 </div>
             </div>
-            <div class="about lg:mb-28 md:mb-11 mb-8 overflow-hidden" data-aos="fade-up" data-aos-delay="300">
-                <img src="<?= base_url('assets/media/about.jpg') ?>" alt="Abdual Shameer" width="1928" height="654"
-                    class="w-full max-w-full about-img">
+            <div class="container mx-auto lg:mb-28 md:mb-11 mb-8 w-full md:hidden block">
+                <img src="<?= base_url('assets/media/shameer-device.jpg') ?>" alt="Abdual Shameer" width="566"
+                    height="710" class="w-full max-w-full h-auto ">
             </div>
-
+            <div class="md:block hidden">
+                <div class="about lg:mb-28 md:mb-11 mb-8 " data-aos="fade-up" data-aos-delay="300">
+                    <img src="<?= base_url('assets/media/about.jpg') ?>" alt="Abdual Shameer" width="1928" height="654"
+                        class="w-full max-w-full about-img">
+                </div>
+            </div>
             <div class="container mx-auto">
                 <div class="flex-col lg:space-y-20 md:space-y-12 space-y-7 justify-between flex pb-24">
                     <div class="title flex items-center gap-3" data-aos="fade-up" data-aos-delay="300">
@@ -57,10 +62,11 @@
                             that has the
                             power to shape experiences and inspire meaningful connections.</p>
                     </div>
-                    <?php 
-                        $cvPath = base_url('uploads/resume/resume.pdf');
+                    <?php
+                    $cvPath = base_url('uploads/resume/resume.pdf');
                     ?>
-                    <a href="<?php echo $cvPath; ?>" target="_blank" class="more-btn group" data-aos="fade-up" data-aos-delay="300"><span>Download CV </span>
+                    <a href="<?php echo $cvPath; ?>" target="_blank" class="more-btn group" data-aos="fade-up"
+                        data-aos-delay="300"><span>Download CV </span>
                         <i class="ri-file-pdf-2-line md:text-2xl text-xl"></i>
                     </a>
                 </div>
@@ -81,36 +87,51 @@
                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 2xl:grid-cols-5 
          items-center brands justify-center text-center gap-x-9 gap-y-14
          [&>*:last-child]:col-span-2 md:[&>*:last-child]:col-span-1">
-                        <div class="text-center flex justify-center"><img src="<?= base_url('assets/media/brand-1.png') ?>" alt="barand"
-                                width="116" height="76" data-aos="fade-up" data-aos-delay="300"> </div>
-                        <div class="text-center flex justify-center"><img src="<?= base_url('assets/media/brand-2.png') ?>" alt="barand"
-                                width="144" height="46" data-aos="fade-up" data-aos-delay="300"> </div>
-                        <div class="text-center flex justify-center"><img src="<?= base_url('assets/media/brand-3.png') ?>" alt="barand"
-                                width="105" height="44" data-aos="fade-up" data-aos-delay="300"> </div>
-                        <div class="text-center flex justify-center"><img src="<?= base_url('assets/media/brand-4.png') ?>" alt="barand"
-                                width="117" height="73" data-aos="fade-up" data-aos-delay="300"> </div>
-                        <div class="text-center flex justify-center"><img src="<?= base_url('assets/media/brand-5.png') ?>" alt="barand"
-                                width="117" height="97" data-aos="fade-up" data-aos-delay="300"> </div>
-                        <div class="text-center flex justify-center"><img src="<?= base_url('assets/media/brand-6.png') ?>" alt="barand"
-                                width="210" height="79" data-aos="fade-up" data-aos-delay="300"> </div>
-                        <div class="text-center flex justify-center"><img src="<?= base_url('assets/media/brand-7.png') ?>" alt="barand"
-                                width="94" height="100" data-aos="fade-up" data-aos-delay="300"> </div>
-                        <div class="text-center flex justify-center"><img src="<?= base_url('assets/media/brand-8.png') ?>" alt="barand"
-                                width="239" height="47" data-aos="fade-up" data-aos-delay="300"> </div>
-                        <div class="text-center flex justify-center"><img src="<?= base_url('assets/media/brand-9.png') ?>" alt="barand"
-                                width="183" height="31" data-aos="fade-up" data-aos-delay="300"> </div>
-                        <div class="text-center flex justify-center"><img src="<?= base_url('assets/media/brand-10.png') ?>" alt="barand"
-                                width="220" height="118" data-aos="fade-up" data-aos-delay="300"> </div>
-                        <div class="text-center flex justify-center"><img src="<?= base_url('assets/media/brand-11.png') ?>" alt="barand"
-                                width="135" height="48" data-aos="fade-up" data-aos-delay="300"> </div>
-                        <div class="text-center flex justify-center"><img src="<?= base_url('assets/media/brand-12.png') ?>" alt="barand"
-                                width="242" height="26" data-aos="fade-up" data-aos-delay="300"> </div>
-                        <div class="text-center flex justify-center"><img src="<?= base_url('assets/media/brand-13.png') ?>" alt="barand"
-                                width="109" height="84" data-aos="fade-up" data-aos-delay="300"> </div>
-                        <div class="text-center flex justify-center"><img src="<?= base_url('assets/media/brand-14.png') ?>" alt="barand"
-                                width="222" height="77" data-aos="fade-up" data-aos-delay="300"> </div>
-                        <div class="text-center flex justify-center"><img src="<?= base_url('assets/media/brand-15.png') ?>" alt="barand"
-                                width="82" height="100" data-aos="fade-up" data-aos-delay="300"> </div>
+                        <div class="text-center flex justify-center"><img
+                                src="<?= base_url('assets/media/brand-1.png') ?>" alt="barand" width="116" height="76"
+                                data-aos="fade-up" data-aos-delay="300"> </div>
+                        <div class="text-center flex justify-center"><img
+                                src="<?= base_url('assets/media/brand-2.png') ?>" alt="barand" width="144" height="46"
+                                data-aos="fade-up" data-aos-delay="300"> </div>
+                        <div class="text-center flex justify-center"><img
+                                src="<?= base_url('assets/media/brand-3.png') ?>" alt="barand" width="105" height="44"
+                                data-aos="fade-up" data-aos-delay="300"> </div>
+                        <div class="text-center flex justify-center"><img
+                                src="<?= base_url('assets/media/brand-4.png') ?>" alt="barand" width="117" height="73"
+                                data-aos="fade-up" data-aos-delay="300"> </div>
+                        <div class="text-center flex justify-center"><img
+                                src="<?= base_url('assets/media/brand-5.png') ?>" alt="barand" width="117" height="97"
+                                data-aos="fade-up" data-aos-delay="300"> </div>
+                        <div class="text-center flex justify-center"><img
+                                src="<?= base_url('assets/media/brand-6.png') ?>" alt="barand" width="210" height="79"
+                                data-aos="fade-up" data-aos-delay="300"> </div>
+                        <div class="text-center flex justify-center"><img
+                                src="<?= base_url('assets/media/brand-7.png') ?>" alt="barand" width="94" height="100"
+                                data-aos="fade-up" data-aos-delay="300"> </div>
+                        <div class="text-center flex justify-center"><img
+                                src="<?= base_url('assets/media/brand-8.png') ?>" alt="barand" width="239" height="47"
+                                data-aos="fade-up" data-aos-delay="300"> </div>
+                        <div class="text-center flex justify-center"><img
+                                src="<?= base_url('assets/media/brand-9.png') ?>" alt="barand" width="183" height="31"
+                                data-aos="fade-up" data-aos-delay="300"> </div>
+                        <div class="text-center flex justify-center"><img
+                                src="<?= base_url('assets/media/brand-10.png') ?>" alt="barand" width="220" height="118"
+                                data-aos="fade-up" data-aos-delay="300"> </div>
+                        <div class="text-center flex justify-center"><img
+                                src="<?= base_url('assets/media/brand-11.png') ?>" alt="barand" width="135" height="48"
+                                data-aos="fade-up" data-aos-delay="300"> </div>
+                        <div class="text-center flex justify-center"><img
+                                src="<?= base_url('assets/media/brand-12.png') ?>" alt="barand" width="242" height="26"
+                                data-aos="fade-up" data-aos-delay="300"> </div>
+                        <div class="text-center flex justify-center"><img
+                                src="<?= base_url('assets/media/brand-13.png') ?>" alt="barand" width="109" height="84"
+                                data-aos="fade-up" data-aos-delay="300"> </div>
+                        <div class="text-center flex justify-center"><img
+                                src="<?= base_url('assets/media/brand-14.png') ?>" alt="barand" width="222" height="77"
+                                data-aos="fade-up" data-aos-delay="300"> </div>
+                        <div class="text-center flex justify-center"><img
+                                src="<?= base_url('assets/media/brand-15.png') ?>" alt="barand" width="82" height="100"
+                                data-aos="fade-up" data-aos-delay="300"> </div>
                     </div>
                 </div>
             </div>
